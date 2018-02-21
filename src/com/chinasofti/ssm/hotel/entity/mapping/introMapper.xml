@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="introMapper">
+<!--公告查询  -->
+<select id="Introshow"  resultType="com.chinasofti.ssm.hotel.entity.Intro">
+
+SELECT * FROM t_intro ;
+</select>
+
+<select id="intrushow" parameterType="com.chinasofti.ssm.hotel.entity.Intro" resultType="com.chinasofti.ssm.hotel.entity.Intro">
+
+SELECT * FROM t_intro WHERE id=#{id};
+
+</select>
+
+<!--公告增加  -->
+<insert id="Introadd" parameterType="com.chinasofti.ssm.hotel.entity.Intro">
+INSERT INTO t_intro VALUES(null,#{uuid},#{introname},#{intro_text},#{img});
+</insert>
+
+<update id="introupdate" parameterType="com.chinasofti.ssm.hotel.entity.Intro">
+UPDATE t_intro SET introname=#{introname},intro_text=#{intro_text},img=#{img} WHERE id=#{id};
+</update>
+
+<delete id="del" parameterType="com.chinasofti.ssm.hotel.entity.Intro">
+DELETE FROM t_intro WHERE id=#{id};
+</delete>
+
+<delete id="deleAll" parameterType="Integer"> 
+ delete from t_intro where id=#{id};
+        
+
+</delete>
+
+<update id="update" parameterType="com.chinasofti.ssm.hotel.entity.Intro">
+UPDATE t_intro SET introname=#{introname},intro_text=#{intro_text} WHERE id=#{id};
+</update>
+
+
+</mapper>

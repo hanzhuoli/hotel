@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="txtMapper">
+
+<select id="txtshow" resultType="com.chinasofti.ssm.hotel.entity.Txt">
+
+select * from t_txt;
+
+</select>
+<delete id="txtdel" parameterType="com.chinasofti.ssm.hotel.entity.Txt">
+
+DELETE FROM t_txt WHERE id=#{id};
+</delete>
+
+<select id="newshow" resultMap="newshow">
+SELECT t.`yjout_time`,u.`user_name` ,t.`out_time`,r.`room_id`FROM t_check t,t_user u ,t_room r WHERE  t.`user_id`=u.`uid` AND t.`r_id`=r.`rid` AND (t.`out_time` IS NULL);
+</select>
+<resultMap type="com.chinasofti.ssm.hotel.entity.Check" id="newshow">
+<id property="id" column="rzid"/>
+<result property="yjout_time" column="yjout_time"/>
+<association property="euser" javaType="com.chinasofti.ssm.hotel.entity.EUser">
+<id property="id" column="uid"/>
+<result property="user_name" column="user_name"/>
+</association>
+
+<association property="room" javaType="com.chinasofti.ssm.hotel.entity.Room">
+<id property="id" column="rid"/>
+<result property="room_id" column="room_id"/>
+</association>
+
+</resultMap>
+
+
+
+<!-- 信息查看 -->
+
+<select id="usershow" resultType="com.chinasofti.ssm.hotel.entity.EUser">
+
+SELECT * FROM t_user WHERE POWER='1'
+</select>
+
+<select id="Usertoupdate" parameterType="com.chinasofti.ssm.hotel.entity.EUser" resultType="com.chinasofti.ssm.hotel.entity.EUser">
+SELECT * FROM t_user WHERE idcard=#{idcard}; 
+</select>
+
+<update id="Userupdate" parameterType="com.chinasofti.ssm.hotel.entity.EUser">
+
+UPDATE t_user SET phone=#{phone},password=#{password} WHERE idcard=#{idcard};
+</update>
+
+
+
+</mapper>
